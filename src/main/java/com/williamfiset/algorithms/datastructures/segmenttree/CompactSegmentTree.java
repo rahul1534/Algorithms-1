@@ -7,6 +7,7 @@
 package com.williamfiset.algorithms.datastructures.segmenttree;
 
 public class CompactSegmentTree {
+
   private int N;
 
   // Let UNIQUE be a value which does NOT
@@ -23,6 +24,7 @@ public class CompactSegmentTree {
 
   public CompactSegmentTree(long[] values) {
     this(values.length);
+    // TODO(william): Implement smarter construction.
     for (int i = 0; i < N; i++) modify(i, values[i]);
   }
 
@@ -35,9 +37,9 @@ public class CompactSegmentTree {
     if (a == UNIQUE) return b;
     else if (b == UNIQUE) return a;
 
-    // return a + b; // sum over a range
+    return a + b; // sum over a range
     // return (a > b) ? a : b; // maximum value over a range
-    return (a < b) ? a : b; // minimum value over a range
+    // return (a < b) ? a : b; // minimum value over a range
     // return a * b; // product over a range (watch out for overflow!)
   }
 
@@ -60,5 +62,26 @@ public class CompactSegmentTree {
       throw new IllegalStateException("UNIQUE should not be the return value.");
     }
     return res;
+  }
+
+  public static void main(String[] args) {
+    // exmaple1();
+    example2();
+  }
+
+  private static void example1() {
+    long[] values = new long[] {3, 0, 8, 9, 8, 2, 5, 3, 7, 1};
+    CompactSegmentTree st = new CompactSegmentTree(values);
+    System.out.println(java.util.Arrays.toString(st.tree));
+  }
+
+  private static void example2() {
+    long[] values = new long[] {1, 1, 1, 1, 1, 1};
+    CompactSegmentTree st = new CompactSegmentTree(values);
+    System.out.println(java.util.Arrays.toString(st.tree));
+
+    System.out.println(st.query(0, 6)); // 6
+    System.out.println(st.query(1, 5)); // 4
+    System.out.println(st.query(0, 2)); // 2
   }
 }

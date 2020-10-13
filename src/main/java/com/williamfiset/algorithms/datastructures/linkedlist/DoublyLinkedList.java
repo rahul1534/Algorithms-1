@@ -96,7 +96,7 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     for (int i = 0; i < index - 1; i++) {
       temp = temp.next;
     }
-    Node<T> newNode = new Node(data, temp, temp.next);
+    Node<T> newNode = new Node<>(data, temp, temp.next);
     temp.next.prev = newNode;
     temp.next = newNode;
 
@@ -287,7 +287,10 @@ public class DoublyLinkedList<T> implements Iterable<T> {
     sb.append("[ ");
     Node<T> trav = head;
     while (trav != null) {
-      sb.append(trav.data + ", ");
+      sb.append(trav.data);
+      if (trav.next != null) {
+        sb.append(", ");
+      }
       trav = trav.next;
     }
     sb.append(" ]");
